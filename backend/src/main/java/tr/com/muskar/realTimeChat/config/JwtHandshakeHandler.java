@@ -19,7 +19,7 @@ public class JwtHandshakeHandler extends DefaultHandshakeHandler {
         String token = getTokenFromRequest(request);
         if (token != null && jwtTokenUtil.validateToken(token)) {
             Claims claims = jwtTokenUtil.getAllClaimsFromToken(token);
-            return () -> claims.getSubject();
+            return claims::getSubject;
         }
         return null;
     }
